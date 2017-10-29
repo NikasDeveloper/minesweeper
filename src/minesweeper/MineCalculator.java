@@ -16,6 +16,7 @@ public class MineCalculator {
         int x = coordinate.getX();
         int y = coordinate.getY();
 
+        // TODO REFACTOR
         if (x > 0 && y > 0 && cells[x - 1][y - 1].isMine()) {
             mineCounter++;
         }

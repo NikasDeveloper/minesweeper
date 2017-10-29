@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 public class Stage implements ActionListener {
 
     private final int STAGE_SIZE = 20;
-    private final int TOTAL_MINES = 20;
+    private final int TOTAL_MINES = 50;
     private Container grid;
     private StageCell[][] cells;
 
@@ -69,13 +69,10 @@ public class Stage implements ActionListener {
     private void showStageCells() {
         for (StageCell[] cellRow : this.cells) {
             for (StageCell cell : cellRow) {
-                if (cell.isPressed()) {
-                    continue;
-                }
+                if (cell.isPressed()) continue;
                 String btnText = cell.isMine() ? "X" : cell.getMinesAround() + "";
                 cell.setText(btnText);
-                cell.setPressed(true);
-                cell.toggleSelected();
+                cell.emitPress();
             }
         }
     }
@@ -85,10 +82,10 @@ public class Stage implements ActionListener {
         int x = coordinate.getX();
         int y = coordinate.getY();
 
-        if (cells[x][y].getMinesAround() != 0) {
-            return;
-        }
+        if (cells[x][y].getMinesAround() != 0) return;
 
+
+        // TODO REFACTOR
         if (x > 0 && y > 0 && !cells[x - 1][y - 1].isSelected()) {
             cells[x - 1][y - 1].setText(Integer.toString(cells[x - 1][y - 1].getMinesAround()));
             cells[x - 1][y - 1].emitPress();
@@ -155,24 +152,58 @@ public class Stage implements ActionListener {
 
     }
 
+    private int countToggledCells() {
+
+        int toggledCells = 0;
+
+        for (StageCell[] cellRow : cells) {
+            for (StageCell cell : cellRow) {
+                toggledCells += cell.isPressed() ? 1 : 0;
+            }
+        }
+
+        return toggledCells;
+
+    }
+
+    private boolean isWin() {
+        return this.countToggledCells() == (STAGE_SIZE * STAGE_SIZE - TOTAL_MINES);
+    }
+
+    private void showLooseNotification() {
+        JOptionPane.showMessageDialog(null, "Game over!");
+    }
+
+    private void showWinNotification() {
+        JOptionPane.showMessageDialog(null, "You won!");
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         StageCell cell = (StageCell) e.getSource();
 
-        if (cell.isPressed()) return;
+        if (cell.isPressed()) {
+            cell.emitPress();
+            return;
+        }
 
         cell.emitPress();
 
         if (cell.isMine()) {
             cell.setText("X");
-            JOptionPane.showMessageDialog(null, "Game over!");
             this.showStageCells();
+            this.showLooseNotification();
             return;
         }
 
-        cell.setText(cell.getMinesAround() + "");
+        cell.setText(Integer.toString(cell.getMinesAround()));
         this.toggleZeroCells(cell.getCoordinate());
+
+        if (this.isWin()) {
+            this.showStageCells();
+            this.showWinNotification();
+        }
 
     }
 
