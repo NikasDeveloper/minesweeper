@@ -30,14 +30,6 @@ public class Stage implements ActionListener {
         this.grid.setLayout(new GridLayout(STAGE_SIZE, STAGE_SIZE));
     }
 
-    public void appendGridCells() {
-        for (StageCell[] cellRow : this.cells) {
-            for (StageCell cell : cellRow) {
-                this.grid.add(cell);
-            }
-        }
-    }
-
     public void initCells() {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
@@ -47,36 +39,34 @@ public class Stage implements ActionListener {
         }
     }
 
+    public void appendGridCells() {
+        for (StageCell[] cellRow : this.cells) {
+            for (StageCell cell : cellRow) {
+                this.grid.add(cell);
+            }
+        }
+    }
+
     public void plantMines() {
 
         CoordinateGenerator coordinateGenerator = new CoordinateGenerator();
         ArrayList<Coordinate> coordinates;
 
-        coordinates = coordinateGenerator.generateCoordinates(
-                STAGE_SIZE - 1,
-                TOTAL_MINES
-        );
+        coordinates = coordinateGenerator.generateCoordinates(STAGE_SIZE - 1, TOTAL_MINES);
 
-        for (Coordinate coordinate : coordinates) {
-            this.cells[coordinate.getX()][coordinate.getY()].setMine(true);
-        }
+        for (Coordinate coordinate : coordinates) this.cells[coordinate.getX()][coordinate.getY()].setMine(true);
 
     }
 
     public void calculateMinesAround() {
-
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
-                cells[i][j].setMinesAround(MineCalculator.calculateMinesArount(
-                        new Coordinate(i, j),
-                        cells)
-                );
+                cells[i][j].setMinesAround(MineCalculator.calculateMinesAround(new Coordinate(i, j), cells));
             }
         }
-
     }
 
-    public void showStageCells() {
+    private void showStageCells() {
         for (StageCell[] cellRow : this.cells) {
             for (StageCell cell : cellRow) {
                 if (cell.isPressed()) {
@@ -90,7 +80,7 @@ public class Stage implements ActionListener {
         }
     }
 
-    public void toggleZeroCells(Coordinate coordinate) {
+    private void toggleZeroCells(Coordinate coordinate) {
 
         int x = coordinate.getX();
         int y = coordinate.getY();
@@ -166,15 +156,11 @@ public class Stage implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e
-    ) {
+    public void actionPerformed(ActionEvent e) {
 
         StageCell cell = (StageCell) e.getSource();
 
-        if (cell.isPressed()) {
-            cell.toggleSelected();
-            return;
-        }
+        if (cell.isPressed()) return;
 
         cell.emitPress();
 
@@ -182,10 +168,11 @@ public class Stage implements ActionListener {
             cell.setText("X");
             JOptionPane.showMessageDialog(null, "Game over!");
             this.showStageCells();
-        } else {
-            cell.setText(cell.getMinesAround() + "");
-            this.toggleZeroCells(cell.getCoordinate());
+            return;
         }
+
+        cell.setText(cell.getMinesAround() + "");
+        this.toggleZeroCells(cell.getCoordinate());
 
     }
 

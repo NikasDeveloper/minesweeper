@@ -11,10 +11,10 @@ public class CoordinateGenerator {
     private ArrayList<Coordinate> coordinates;
 
     public CoordinateGenerator() {
-        coordinates = new ArrayList<>();
+        this.coordinates = new ArrayList<>();
     }
 
-    public boolean coordinateExists(int x, int y) {
+    private boolean coordinateExists(int x, int y) {
         for (Coordinate coordinate : this.coordinates) {
             if (coordinate.equals(new Coordinate(x, y))) {
                 return true;
@@ -29,8 +29,8 @@ public class CoordinateGenerator {
 
         for (int i = 0; i < amount; i++) {
 
-            int x = r.nextInt(to);
-            int y = r.nextInt(to);
+            int x;
+            int y;
 
             do {
                 x = r.nextInt(to);

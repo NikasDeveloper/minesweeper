@@ -10,7 +10,7 @@ package minesweeper;
  */
 public class MineCalculator {
 
-    public static int calculateMinesArount(Coordinate coordinate, StageCell[][] cells) {
+    public static int calculateMinesAround(Coordinate coordinate, StageCell[][] cells) {
 
         int mineCounter = 0;
         int x = coordinate.getX();

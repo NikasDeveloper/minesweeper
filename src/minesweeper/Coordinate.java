@@ -33,13 +33,7 @@ public class Coordinate {
     public void setY(int y) {
         this.y = y;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
-    }
-
+    
     @Override
     public boolean equals(Object obj) {
         final Coordinate other = (Coordinate) obj;

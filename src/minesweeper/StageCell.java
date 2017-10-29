@@ -12,14 +12,6 @@ public class StageCell extends JToggleButton {
     private int minesAround;
     private Coordinate coordinate;
 
-    StageCell() {
-        super();
-        this.pressed = false;
-        this.mine = false;
-        this.minesAround = 0;
-        this.coordinate = new Coordinate();
-    }
-
     StageCell(Coordinate coordinate) {
         super();
         this.pressed = false;
@@ -30,7 +22,7 @@ public class StageCell extends JToggleButton {
     }
 
     public boolean isPressed() {
-        return pressed;
+        return this.pressed;
     }
 
     public void setPressed(boolean pressed) {
@@ -38,7 +30,7 @@ public class StageCell extends JToggleButton {
     }
 
     public boolean isMine() {
-        return mine;
+        return this.mine;
     }
 
     public void setMine(boolean mine) {
@@ -50,7 +42,7 @@ public class StageCell extends JToggleButton {
     }
 
     public int getMinesAround() {
-        return minesAround;
+        return this.minesAround;
     }
 
     public void setMinesAround(int minesAround) {
@@ -58,11 +50,7 @@ public class StageCell extends JToggleButton {
     }
 
     public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
+        return this.coordinate;
     }
 
     public void emitPress() {
