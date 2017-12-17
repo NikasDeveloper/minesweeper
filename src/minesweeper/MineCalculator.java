@@ -10,7 +10,7 @@ package minesweeper;
  */
 public class MineCalculator {
 
-    public static int calculateMinesAround(Coordinate coordinate, StageCell[][] cells) {
+    private int calculateMinesAround(Coordinate coordinate, StageCell[][] cells) {
 
         int mineCounter = 0;
         int x = coordinate.getX();
@@ -50,6 +50,17 @@ public class MineCalculator {
         }
 
         return mineCounter;
+
+    }
+
+    public void setMineCounter(StageCell[][] cells) {
+
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells[i].length; j++) {
+                int minesAround = this.calculateMinesAround(new Coordinate(i, j), cells);
+                cells[i][j].setMinesAround(minesAround);
+            }
+        }
 
     }
 

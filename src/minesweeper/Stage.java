@@ -1,10 +1,7 @@
 package minesweeper;
 
-import java.awt.Container;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,20 +11,22 @@ public class Stage implements ActionListener {
 
     private final int STAGE_SIZE = 20;
     private final int TOTAL_MINES = 50;
-    private Container grid;
     private StageCell[][] cells;
 
     public Stage() {
-        this.grid = new Container();
         this.cells = new StageCell[STAGE_SIZE][STAGE_SIZE];
     }
 
-    public Container getGrid() {
-        return grid;
+    public int getStageSize() {
+        return STAGE_SIZE;
     }
 
-    public void initGridLayout() {
-        this.grid.setLayout(new GridLayout(STAGE_SIZE, STAGE_SIZE));
+    public int getTotalMines() {
+        return TOTAL_MINES;
+    }
+
+    public StageCell[][] getCells() {
+        return cells;
     }
 
     public void initCells() {
@@ -35,33 +34,6 @@ public class Stage implements ActionListener {
             for (int j = 0; j < cells[i].length; j++) {
                 cells[i][j] = new StageCell(new Coordinate(i, j));
                 cells[i][j].addActionListener(this);
-            }
-        }
-    }
-
-    public void appendGridCells() {
-        for (StageCell[] cellRow : this.cells) {
-            for (StageCell cell : cellRow) {
-                this.grid.add(cell);
-            }
-        }
-    }
-
-    public void plantMines() {
-
-        CoordinateGenerator coordinateGenerator = new CoordinateGenerator();
-        ArrayList<Coordinate> coordinates;
-
-        coordinates = coordinateGenerator.generateCoordinates(STAGE_SIZE - 1, TOTAL_MINES);
-
-        for (Coordinate coordinate : coordinates) this.cells[coordinate.getX()][coordinate.getY()].setMine(true);
-
-    }
-
-    public void calculateMinesAround() {
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[i].length; j++) {
-                cells[i][j].setMinesAround(MineCalculator.calculateMinesAround(new Coordinate(i, j), cells));
             }
         }
     }

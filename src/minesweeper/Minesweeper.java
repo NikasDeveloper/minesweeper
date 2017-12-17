@@ -1,30 +1,34 @@
 package minesweeper;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author Nikolajus Lebedenko PRif-15/1
  */
 public class Minesweeper {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
+
         GameFrame gameFrame = new GameFrame("Minesweeper");
+        Container grid = new Container();
         Stage stage = new Stage();
 
-        stage.initGridLayout();
+        grid.setLayout(new GridLayout(stage.getStageSize(), stage.getStageSize()));
         stage.initCells();
-        stage.appendGridCells();
-        stage.plantMines();
-        stage.calculateMinesAround();
 
-        gameFrame.add(stage.getGrid(), BorderLayout.CENTER);
-        gameFrame.show();
+        MinePlanter minePlanter = new MinePlanter(stage.getStageSize(), stage.getTotalMines());
+        minePlanter.plantMines(stage.getCells());
+
+        // Add cells to grid
+        for (StageCell[] cellRow : stage.getCells()) for (StageCell cell : cellRow) grid.add(cell);
+
+        MineCalculator mineCalculator = new MineCalculator();
+        mineCalculator.setMineCounter(stage.getCells());
+
+        gameFrame.add(grid, BorderLayout.CENTER);
+        gameFrame.setVisible(true);
+
     }
 
 }
