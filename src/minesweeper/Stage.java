@@ -32,18 +32,18 @@ public class Stage {
         return cells;
     }
 
-    public ArrayList<StageCell> getCellNeighbours(int x, int y){
+    public ArrayList<StageCell> getCellNeighbours(int x, int y) {
 
         ArrayList<StageCell> neighbours = new ArrayList<>();
 
-        for(int xOffset = -1; xOffset <= 1; xOffset++){
+        for (int xOffset = -1; xOffset <= 1; xOffset++) {
 
             int i = x + xOffset;
-            if(i < 0 || i >= STAGE_SIZE) continue;
+            if (i < 0 || i >= STAGE_SIZE) continue;
 
-            for(int yOffset = -1; yOffset <= 1; yOffset++){
+            for (int yOffset = -1; yOffset <= 1; yOffset++) {
                 int j = y + yOffset;
-                if(j < 0 || j >= STAGE_SIZE) continue;
+                if (j < 0 || j >= STAGE_SIZE) continue;
                 neighbours.add(cells[i][j]);
             }
 
