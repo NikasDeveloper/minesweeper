@@ -1,10 +1,12 @@
 package minesweeper;
 
+import minesweeper.utilities.Toogler;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class StageCellToggler {
+public class StageCellToggler implements Toogler {
 
+    @Override
     public void toogleCell(StageCell cell, JToggleButton button) {
         cell.emitPress();
         button.setSelected(true);
@@ -12,12 +14,14 @@ public class StageCellToggler {
         button.setText(cell.getText());
     }
 
+    @Override
     public void toggleAllCells(StageCell[][] cells, JToggleButton[][] buttons) {
         for (StageCell[] cellRow : cells)
             for (StageCell cell : cellRow)
                 if (!cell.isPressed()) this.toogleCell(cell, buttons[cell.getX()][cell.getY()]);
     }
 
+    @Override
     public void toggleZeroCells(int x, int y, Stage stage, JToggleButton[][] buttons) {
 
         if (stage.getCells()[x][y].getMinesAround() != 0) return;

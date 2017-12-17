@@ -1,12 +1,13 @@
 package minesweeper;
 
+import minesweeper.utilities.Generatable;
 import java.util.Random;
 import java.util.ArrayList;
 
 /**
  * @author LebedenkoN
  */
-public class CoordinateGenerator {
+public class CoordinateGenerator implements Generatable {
 
     private ArrayList<Coordinate> coordinates;
 
@@ -19,6 +20,7 @@ public class CoordinateGenerator {
         return false;
     }
 
+    @Override
     public ArrayList<Coordinate> generateCoordinates(int to, int amount) {
 
         Random r = new Random();

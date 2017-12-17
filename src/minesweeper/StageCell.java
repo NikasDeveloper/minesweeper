@@ -1,9 +1,11 @@
 package minesweeper;
 
+import minesweeper.utilities.Pressable;
+
 /**
  * @author LebedenkoN
  */
-public class StageCell {
+public class StageCell implements Pressable {
 
     private boolean pressed;
     private boolean mine;

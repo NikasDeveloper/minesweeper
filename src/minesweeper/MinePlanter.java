@@ -1,8 +1,9 @@
 package minesweeper;
 
+import minesweeper.utilities.Plantable;
 import java.util.ArrayList;
 
-public class MinePlanter {
+public class MinePlanter implements Plantable {
 
     private int size;
     private int toPlant;
@@ -20,6 +21,7 @@ public class MinePlanter {
         this.coordinates = generator.generateCoordinates(size, toPlant);
     }
 
+    @Override
     public void plantMines(StageCell[][] cells) {
         this.setCoordinates();
         for (Coordinate coordinate : coordinates) cells[coordinate.getX()][coordinate.getY()].setMine(true);

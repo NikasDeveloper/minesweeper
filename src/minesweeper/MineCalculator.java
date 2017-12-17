@@ -5,17 +5,21 @@
  */
 package minesweeper;
 
+import minesweeper.utilities.Calculatable;
+
 /**
  * @author LebedenkoN
  */
-public class MineCalculator {
+public class MineCalculator implements Calculatable{
 
-    private int calculateMinesAround(int x, int y, Stage stage) {
+    @Override
+    public int calculateMinesAround(int x, int y, Stage stage) {
         int mineCounter = 0;
         for (StageCell cell : stage.getCellNeighbours(x, y)) if (cell.isMine()) mineCounter++;
         return mineCounter;
     }
 
+    @Override
     public void setMineCounter(Stage stage) {
 
         StageCell[][] cells = stage.getCells();
