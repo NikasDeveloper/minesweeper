@@ -16,11 +16,11 @@ public class MinePlanter {
         this.coordinates = new ArrayList<>();
     }
 
-    private void setCoordinates(){
+    private void setCoordinates() {
         this.coordinates = generator.generateCoordinates(size, toPlant);
     }
 
-    public void plantMines(StageCell[][] cells){
+    public void plantMines(StageCell[][] cells) {
         this.setCoordinates();
         for (Coordinate coordinate : coordinates) cells[coordinate.getX()][coordinate.getY()].setMine(true);
     }

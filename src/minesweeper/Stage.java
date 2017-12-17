@@ -1,13 +1,9 @@
 package minesweeper;
 
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
-
 /**
  * @author LebedenkoN
  */
-public class Stage{
+public class Stage {
 
     private final int STAGE_SIZE = 20;
     private final int TOTAL_MINES = 50;

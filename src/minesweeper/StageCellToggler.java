@@ -60,8 +60,7 @@ public class StageCellToggler {
             this.toogleCell(cells[x - 1][y], buttons[x - 1][y]);
             if (cells[x - 1][y].getMinesAround() == 0) this.toggleZeroCells(x - 1, y, cells, buttons);
         }
-
-
+        
     }
 
 }

@@ -1,11 +1,9 @@
 package minesweeper;
 
-import javax.swing.JToggleButton;
-
 /**
  * @author LebedenkoN
  */
-public class StageCell{
+public class StageCell {
 
     private boolean pressed;
     private boolean mine;
@@ -51,15 +49,15 @@ public class StageCell{
         return this.coordinate;
     }
 
-    public int getX(){
+    public int getX() {
         return this.coordinate.getX();
     }
 
-    public int getY(){
+    public int getY() {
         return this.coordinate.getY();
     }
 
-    public String getText(){
+    public String getText() {
         return this.mine ? "X" : this.minesAround + "";
     }
 

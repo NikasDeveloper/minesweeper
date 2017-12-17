@@ -6,7 +6,7 @@
 package minesweeper;
 
 import java.awt.BorderLayout;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  * @author LebedenkoN
@@ -20,7 +20,7 @@ public class GameFrame extends JFrame {
         super(title);
         this.setSize(APP_WIDTH, APP_HEIGHT);
         this.setLayout(new BorderLayout());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
 }

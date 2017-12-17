@@ -2,7 +2,7 @@ package minesweeper;
 
 public class GameRules {
 
-    public boolean isLoose(StageCell cell){
+    public boolean isLoose(StageCell cell) {
         return cell.isMine();
     }
 
