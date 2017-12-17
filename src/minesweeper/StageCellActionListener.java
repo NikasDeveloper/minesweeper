@@ -32,7 +32,7 @@ public class StageCellActionListener implements ActionListener {
             return;
         }
 
-        toggler.toggleZeroCells(cell.getX(), cell.getY(), stage.getCells(), toggleButtons);
+        toggler.toggleZeroCells(cell.getX(), cell.getY(), stage, toggleButtons);
 
         if (gameRules.isWin(stage)) Notifier.win();
 

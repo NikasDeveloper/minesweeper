@@ -45,10 +45,6 @@ public class StageCell {
         this.minesAround = minesAround;
     }
 
-    public Coordinate getCoordinate() {
-        return this.coordinate;
-    }
-
     public int getX() {
         return this.coordinate.getX();
     }

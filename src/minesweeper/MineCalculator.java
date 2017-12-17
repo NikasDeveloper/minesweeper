@@ -10,54 +10,19 @@ package minesweeper;
  */
 public class MineCalculator {
 
-    private int calculateMinesAround(Coordinate coordinate, StageCell[][] cells) {
-
+    private int calculateMinesAround(int x, int y, Stage stage) {
         int mineCounter = 0;
-        int x = coordinate.getX();
-        int y = coordinate.getY();
-
-        // TODO REFACTOR
-        if (x > 0 && y > 0 && cells[x - 1][y - 1].isMine()) {
-            mineCounter++;
-        }
-
-        if (y > 0 && cells[x][y - 1].isMine()) {
-            mineCounter++;
-        }
-
-        if (x < cells.length - 1 && y > 0 && cells[x + 1][y - 1].isMine()) {
-            mineCounter++;
-        }
-
-        if (x < cells.length - 1 && cells[x + 1][y].isMine()) {
-            mineCounter++;
-        }
-
-        if (x < cells.length - 1 && y < cells[x].length - 1 && cells[x + 1][y + 1].isMine()) {
-            mineCounter++;
-        }
-
-        if (y < cells[x].length - 1 && cells[x][y + 1].isMine()) {
-            mineCounter++;
-        }
-
-        if (x > 0 && y < cells[x].length - 1 && cells[x - 1][y + 1].isMine()) {
-            mineCounter++;
-        }
-
-        if (x > 0 && cells[x - 1][y].isMine()) {
-            mineCounter++;
-        }
-
+        for (StageCell cell : stage.getCellNeighbours(x, y)) if (cell.isMine()) mineCounter++;
         return mineCounter;
-
     }
 
-    public void setMineCounter(StageCell[][] cells) {
+    public void setMineCounter(Stage stage) {
+
+        StageCell[][] cells = stage.getCells();
 
         for (int i = 0; i < cells.length; i++)
             for (int j = 0; j < cells[i].length; j++)
-                cells[i][j].setMinesAround(this.calculateMinesAround(new Coordinate(i, j), cells));
+                cells[i][j].setMinesAround(this.calculateMinesAround(cells[i][j].getX(), cells[i][j].getY(), stage));
 
     }
 

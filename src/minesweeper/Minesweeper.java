@@ -19,7 +19,7 @@ public class Minesweeper {
 
         grid.setLayout(new GridLayout(stage.getStageSize(), stage.getStageSize()));
         minePlanter.plantMines(stage.getCells());
-        mineCalculator.setMineCounter(stage.getCells());
+        mineCalculator.setMineCounter(stage);
 
         for (StageCell[] cellRow : stage.getCells()) {
             for (StageCell cell : cellRow) {
