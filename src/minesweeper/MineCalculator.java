@@ -55,12 +55,9 @@ public class MineCalculator {
 
     public void setMineCounter(StageCell[][] cells) {
 
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[i].length; j++) {
-                int minesAround = this.calculateMinesAround(new Coordinate(i, j), cells);
-                cells[i][j].setMinesAround(minesAround);
-            }
-        }
+        for (int i = 0; i < cells.length; i++)
+            for (int j = 0; j < cells[i].length; j++)
+                cells[i][j].setMinesAround(this.calculateMinesAround(new Coordinate(i, j), cells));
 
     }
 

@@ -1,7 +1,7 @@
 package minesweeper;
 
+import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * @author Nikolajus Lebedenko PRif-15/1
@@ -13,18 +13,23 @@ public class Minesweeper {
         GameFrame gameFrame = new GameFrame("Minesweeper");
         Container grid = new Container();
         Stage stage = new Stage();
+        JToggleButton[][] toggleButtons = new JToggleButton[stage.getStageSize()][stage.getStageSize()];
+        MinePlanter minePlanter = new MinePlanter(stage.getStageSize(), stage.getTotalMines());
+        MineCalculator mineCalculator = new MineCalculator();
 
         grid.setLayout(new GridLayout(stage.getStageSize(), stage.getStageSize()));
-        stage.initCells();
-
-        MinePlanter minePlanter = new MinePlanter(stage.getStageSize(), stage.getTotalMines());
         minePlanter.plantMines(stage.getCells());
-
-        // Add cells to grid
-        for (StageCell[] cellRow : stage.getCells()) for (StageCell cell : cellRow) grid.add(cell);
-
-        MineCalculator mineCalculator = new MineCalculator();
         mineCalculator.setMineCounter(stage.getCells());
+
+        for (StageCell[] cellRow : stage.getCells()) {
+            for (StageCell cell : cellRow) {
+                toggleButtons[cell.getX()][cell.getY()] = new JToggleButton();
+                toggleButtons[cell.getX()][cell.getY()].addActionListener(
+                        new StageCellActionListener(cell, stage, toggleButtons)
+                );
+                grid.add(toggleButtons[cell.getX()][cell.getY()]);
+            }
+        }
 
         gameFrame.add(grid, BorderLayout.CENTER);
         gameFrame.setVisible(true);

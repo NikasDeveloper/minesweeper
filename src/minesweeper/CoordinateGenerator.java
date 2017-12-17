@@ -1,7 +1,7 @@
 package minesweeper;
 
-import java.util.ArrayList;
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  * @author LebedenkoN
@@ -15,11 +15,7 @@ public class CoordinateGenerator {
     }
 
     private boolean coordinateExists(int x, int y) {
-        for (Coordinate coordinate : this.coordinates) {
-            if (coordinate.equals(new Coordinate(x, y))) {
-                return true;
-            }
-        }
+        for (Coordinate coordinate : this.coordinates) if (coordinate.equals(new Coordinate(x, y))) return true;
         return false;
     }
 
@@ -29,8 +25,7 @@ public class CoordinateGenerator {
 
         for (int i = 0; i < amount; i++) {
 
-            int x;
-            int y;
+            int x, y;
 
             do {
                 x = r.nextInt(to);
@@ -38,6 +33,7 @@ public class CoordinateGenerator {
             } while (this.coordinateExists(x, y));
 
             coordinates.add(new Coordinate(x, y));
+
         }
 
         return this.coordinates;

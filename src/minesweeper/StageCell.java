@@ -5,10 +5,11 @@ import javax.swing.JToggleButton;
 /**
  * @author LebedenkoN
  */
-public class StageCell extends JToggleButton {
+public class StageCell{
 
     private boolean pressed;
     private boolean mine;
+    private boolean selected;
     private int minesAround;
     private Coordinate coordinate;
 
@@ -16,6 +17,7 @@ public class StageCell extends JToggleButton {
         super();
         this.pressed = false;
         this.mine = false;
+        this.selected = false;
         this.minesAround = 0;
         this.coordinate = new Coordinate();
         this.coordinate = coordinate;
@@ -23,10 +25,6 @@ public class StageCell extends JToggleButton {
 
     public boolean isPressed() {
         return this.pressed;
-    }
-
-    public void setPressed(boolean pressed) {
-        this.pressed = pressed;
     }
 
     public boolean isMine() {
@@ -37,8 +35,8 @@ public class StageCell extends JToggleButton {
         this.mine = mine;
     }
 
-    public void toggleSelected() {
-        this.setSelected(true);
+    public boolean isSelected() {
+        return selected;
     }
 
     public int getMinesAround() {
@@ -53,9 +51,21 @@ public class StageCell extends JToggleButton {
         return this.coordinate;
     }
 
+    public int getX(){
+        return this.coordinate.getX();
+    }
+
+    public int getY(){
+        return this.coordinate.getY();
+    }
+
+    public String getText(){
+        return this.mine ? "X" : this.minesAround + "";
+    }
+
     public void emitPress() {
-        this.setPressed(true);
-        this.toggleSelected();
+        this.pressed = true;
+        this.selected = true;
     }
 
 }
